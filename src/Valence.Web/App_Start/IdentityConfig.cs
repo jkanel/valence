@@ -14,23 +14,21 @@ using Valence.Web.ViewModels;
 
 namespace Valence.Web
 {
-    public class EmailService : IIdentityMessageService
+
+    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    public class ApplicationUser : IdentityUser
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
         }
     }
 
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
+
+
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -104,6 +102,25 @@ namespace Valence.Web
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+    }
+
+
+    public class EmailService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+            // Plug in your email service here to send an email.
+            return Task.FromResult(0);
+        }
+    }
+
+    public class SmsService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+            // Plug in your SMS service here to send a text message.
+            return Task.FromResult(0);
         }
     }
 }
