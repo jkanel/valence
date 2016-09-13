@@ -1,0 +1,74 @@
+﻿@model Valence.Web.ViewModels.OrganizationViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrganizationViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebPageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebPageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsServicesVendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsServicesVendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsProductVendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsProductVendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNonProfit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsNonProfit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEducational)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEducational)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

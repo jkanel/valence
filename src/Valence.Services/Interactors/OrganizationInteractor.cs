@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using Valence.Entities;
 using Valence.Models;
 using Valence.Repositories;
@@ -19,29 +20,43 @@ namespace Valence.Interactors
             this.Repository = Repository;
         }
 
-        public void CreateOrganization(OrganizationModel model, int WorkerMemberId)
+        public OrganizationInteractor(DbContext Context)
+        {
+            this.Repository = new OrganizationRepository(Context);
+        }
+
+        /// <summary>
+        /// Returns all organizations visible for the specified privilege level
+        /// </summary>
+        /// <param name="ContextMemberId"></param>
+        /// <returns></returns>
+        public OrganizationModelList GetPrivilegeOrganizations(int ContextMemberId)
+        {
+            OrganizationModelList list = new OrganizationModelList(Repository.AssociatedSelectAll(ContextMemberId));
+            return list;
+        }
+
+ 
+        public void CreateOrganization(int ContextMemberId, OrganizationModel model)
         {
             Organization entity = model.ToEntity();
-            entity.SetCreateInfo(WorkerMemberId);
+            entity.SetCreateInfo(ContextMemberId);
             Repository.Insert(entity);
         }
 
-        public void DeleteOrganization(int OrganizationId, int WorkerMemberId)
+        public void DeleteOrganization(int ContextMemberId, int OrganizationId)
         {
             Repository.DeleteSingle(OrganizationId);
         }
 
-        public void UpdateOrganization(OrganizationModel model, int WorkerMemberId)
+        public void UpdateOrganization(int ContextMemberId, OrganizationModel model)
         {
             Organization entity = model.ToEntity();
-            entity.SetModifyInfo(WorkerMemberId);
+            entity.SetModifyInfo(ContextMemberId);
 
             Repository.UpdateExcept(entity, Organization.CreateProperties);
         }
+        
 
-        public void UpdateOrganizationApproval(int OrganizationId, bool IsApproved, int WorkerMemberId)
-        {
-            throw new NotImplementedException();
-        }       
     }
 }

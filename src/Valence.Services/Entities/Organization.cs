@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Valence.Entities
 {
+
+
     [Table("Organization", Schema = "dbo")]
     public class Organization : EntityBase
     {
@@ -21,9 +23,10 @@ namespace Valence.Entities
 		public bool IsProductVendor { get; set; }
 		public bool IsNonProfit { get; set; }
 		public bool IsEducational { get; set; }
-        public virtual IEnumerable<Member> Members { get; set; }
 
-        public virtual IEnumerable<Event> Events { get; set; }
+        public virtual IEnumerable<OrganizationMember> OrganizationMembers { get; set; }
+
+        public virtual IEnumerable<EventMember> EventMembers { get; set; }
 
 
     }

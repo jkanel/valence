@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Valence.Web.ViewModels.OrganizationViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WebPageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsServicesVendor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsProductVendor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsNonProfit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsEducational)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WebPageUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsServicesVendor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsProductVendor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsNonProfit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsEducational)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrganizationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrganizationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrganizationId })
+        </td>
+    </tr>
+}
+
+</table>

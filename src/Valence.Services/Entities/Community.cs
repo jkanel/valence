@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Valence.Entities
 {
+
     [Table("Community", Schema = "dbo")]
     public class Community : EntityBase
     {

@@ -5,7 +5,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Valence.Web.App_Start
+namespace Valence.Web
 {
     public class CustomUserRole : IdentityUserRole<int> { }
     public class CustomUserClaim : IdentityUserClaim<int> { }
@@ -17,8 +17,7 @@ namespace Valence.Web.App_Start
         public CustomRole(string name) { Name = name; }
     }
 
-    public class CustomUserStore : UserStore<ApplicationUser, CustomRole, int,
-        CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class CustomUserStore : UserStore<ApplicationUser, CustomRole, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public CustomUserStore(ApplicationDbContext context)
             : base(context)

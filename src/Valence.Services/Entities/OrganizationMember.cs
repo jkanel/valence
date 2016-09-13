@@ -24,5 +24,8 @@ namespace Valence.Entities
         public int OrganizationRoleId { get; set; }
         public virtual OrganizationRole OrganizationRole { get; set; }
 
+        public DateTime EffectiveTimestamp { get; set; }
+        public DateTime AssignmentTimestamp { get; set; }
+
     }
 }

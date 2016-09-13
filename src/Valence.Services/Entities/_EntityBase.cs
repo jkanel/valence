@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Valence.Entities
 {
+
     public class EntityBase
     {
 

@@ -13,40 +13,40 @@ namespace Valence.Services
 
     public interface IOrganizationService
     {
-        void CreateOrganization(OrganizationInteractor oi, OrganizationModel model, int ContextMemberId);
-        void DeleteOrganization(int OrganizationId, int ContextMemberId);
-        bool CanAdminOrganization(int OrganizationId, int ContextMemberId);
-
     }
 
-    public class OrganizationService
+    public class OrganizationService : ServiceBase ,IOrganizationService
     {
+        #region Interactors
+        public OrganizationInteractor OrganizationInteractor { get; set; }
+        public OrganizationMemberInteractor OrganizationMemberInteractor { get; set; }
+        #endregion
 
-        public OrganizationService() { }
+        public OrganizationService() {}
 
-        public void CreateOrganization(OrganizationModel model, int ContextMemberId, OrganizationInteractor oi)
+        public OrganizationModelList GetContextOrganizations(int ContextMemberId)
         {
-            //Organization entity = model.ToEntity();
-            //entity.SetCreateInfo(ContextMemberId);
-            //Repository.Insert(entity);
 
-            //OrganizationMember om = new OrganizationMember();
-            //om.MemberId = ContextMemberId;
-            //om.OrganizationId = model.OrganizationId;
-            //om.OrganizationRoleId = 
-            //om.SetCreateInfo(ContextMemberId);
-            
+            return OrganizationInteractor.GetPrivilegeOrganizations(ContextMemberId);
         }
 
-        //public bool CanAdminOrganization(OrganizationInteractor oi, int OrganizationId, int ContextMemberId)
-        //{
+        public void CreateOrganization(int ContextMemberId, OrganizationModel model)
+        {
+            
+            OrganizationInteractor.CreateOrganization(ContextMemberId, model);
 
-        //}
+            OrganizationMemberModel om = new OrganizationMemberModel();
 
-        //public void DeleteOrganization(int OrganizationId)
-        //{
-        //    Repository.DeleteSingle(OrganizationId);
-        //}
+            om.MemberId = ContextMemberId;
+            om.OrganizationId = model.OrganizationId;
+            om.OrganizationRoleId = (int)model.ContextRole;
+            om.AssignmentTimestamp = DateTime.Now;
+            om.EffectiveTimestamp = om.AssignmentTimestamp;
+
+            OrganizationMemberInteractor.CreateOrganizationMember(ContextMemberId, om);
+
+        }
+
 
     }
 }

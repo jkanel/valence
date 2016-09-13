@@ -24,7 +24,8 @@ namespace Valence.Entities
         public int EventRoleId { get; set; }
         public virtual EventRole EventRole { get; set; }
 
-        public DateTime AssignmentDate { get; set; }
+        public DateTime EffectiveTimestamp { get; set; }
+        public DateTime AssignmentTimestamp { get; set; }
 
     }
 }

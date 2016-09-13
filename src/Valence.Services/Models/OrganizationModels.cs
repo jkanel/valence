@@ -4,27 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Valence.Entities;
+using Valence.Repositories;
 
 namespace Valence.Models
 {
 
     public class OrganizationModelList : List<OrganizationModel>
     {
-        public OrganizationModelList(IEnumerable<Organization> entities)
+        public OrganizationModelList(IEnumerable<OrganizationRoleBinder> binders )
         {
-            foreach (var entity in entities)
+            foreach (var binder in binders)
             {
-                Add(new OrganizationModel(entity));
+                Add(new OrganizationModel(binder.Entity, binder.Role));
             }
         }
     }
 
-    public class OrganizationModel : IModel<Organization>
+    public class OrganizationModel : IModel<Organization>, IContextPrivilegeModel<OrganizationRoleEnum>
     {
         public OrganizationModel() { }
-        public OrganizationModel(Organization entity)
+        public OrganizationModel(Organization entity, OrganizationRoleEnum role)
         {
             this.Construct(entity);
+            this.ContextRole = role;
         }
         
         public int OrganizationId { get; set; }
@@ -36,6 +38,36 @@ namespace Valence.Models
         public bool IsNonProfit { get; set; }
         public bool IsEducational { get; set; }
 
+        #region IContextPrivilegeModel Methods
+        public OrganizationRoleEnum ContextRole { get; set; }
+
+        public bool CanEdit()
+        {
+            return OrganizationRoleModel.RoleCanEdit(this.ContextRole);
+        }
+
+        public bool CanDelete()
+        {
+            return OrganizationRoleModel.RoleCanDelete(this.ContextRole);
+        }
+
+        public bool CanView()
+        {
+            return OrganizationRoleModel.RoleCanView(this.ContextRole);
+        }
+
+        public bool CanAdmin()
+        {
+            return OrganizationRoleModel.RoleCanAdmin(this.ContextRole);
+        }
+
+        public bool CanCoordinate()
+        {
+            return OrganizationRoleModel.RoleCanCoordinate(this.ContextRole);
+        }
+        #endregion
+
+        #region IModel Methods
         public void Construct(Organization entity)
         {
 
@@ -47,6 +79,7 @@ namespace Valence.Models
             this.IsProductVendor = entity.IsProductVendor;
             this.IsNonProfit = entity.IsNonProfit;
             this.IsEducational = entity.IsEducational;
+           
         }
 
         public Organization ToEntity()
@@ -65,5 +98,7 @@ namespace Valence.Models
             return entity;
 
         }
+        #endregion
+
     }
 }

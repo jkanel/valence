@@ -14,5 +14,12 @@ namespace Valence.Repositories
         public OrganizationRepository(DbContext Context) : base(Context)
         {
         }
+
+        public IEnumerable<OrganizationRoleBinder> AssociatedSelectAll(int ContextMemberId)
+        { 
+            return this.Context.Set<OrganizationMember>()
+                .Where(om => om.MemberId == ContextMemberId)
+                .Select(er => new OrganizationRoleBinder(er.Organization, (OrganizationRoleEnum)er.OrganizationRoleId)).ToList();               
+         }
     }
 }

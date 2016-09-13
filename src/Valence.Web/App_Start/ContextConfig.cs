@@ -3,15 +3,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using Valence.Entities;
 
 namespace Valence.Web
 {
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
         }
 
@@ -19,6 +19,12 @@ namespace Valence.Web
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Organization> Organizations { get; set; }
+        public System.Data.Entity.DbSet<OrganizationMember> OrganizationMembers { get; set; }
+        public System.Data.Entity.DbSet<Community> Communities { get; set; }
+        public System.Data.Entity.DbSet<CommunityMember> CommunityMembers { get; set; }
+
 
         /*
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)

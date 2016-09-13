@@ -52,6 +52,7 @@
     <Compile Include="Entities\Community.cs" />
     <Compile Include="Entities\CommunityMember.cs" />
     <Compile Include="Entities\CommunityRole.cs" />
+    <Compile Include="Entities\_Binders.cs" />
     <Compile Include="Entities\_EntityBase.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventMember.cs" />
@@ -60,18 +61,22 @@
     <Compile Include="Entities\Organization.cs" />
     <Compile Include="Entities\OrganizationMember.cs" />
     <Compile Include="Entities\OrganizationRole.cs" />
+    <Compile Include="Interactors\OrganizationRoleInteractor.cs" />
     <Compile Include="Interactors\OrganizationMemberInteractor.cs" />
     <Compile Include="Interactors\OrganizationInteractor.cs" />
     <Compile Include="Models\CommunityModel.cs" />
+    <Compile Include="Models\OrganizationRoleModel.cs" />
     <Compile Include="Models\OrganizationMemberModel.cs" />
     <Compile Include="Models\OrganizationModels.cs" />
     <Compile Include="Models\_ModelBase.cs" />
     <Compile Include="Repositories\CommunityRepository.cs" />
     <Compile Include="Repositories\OrganizationMemberRepository.cs" />
+    <Compile Include="Repositories\OrganizationRoleRepository.cs" />
     <Compile Include="Repositories\OrganizationRepository.cs" />
     <Compile Include="Repositories\_RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\OrganizationService.cs" />
+    <Compile Include="Services\_ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

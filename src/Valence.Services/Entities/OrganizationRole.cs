@@ -8,6 +8,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Valence.Entities
 {
+    public enum OrganizationRoleEnum
+    {
+        None = 0,
+        Associate = 1,
+        Coordinator = 2,
+        Manager = 3,
+        Admin = 100
+    }
+
     [Table("OrganizationRole", Schema = "dbo")]
     public class OrganizationRole : EntityBase
     {

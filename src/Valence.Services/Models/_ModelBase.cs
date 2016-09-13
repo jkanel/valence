@@ -11,5 +11,15 @@ namespace Valence.Models
         TEntity ToEntity();
         void Construct(TEntity entity);
         
-    }  
+    }
+
+    public interface IContextPrivilegeModel<TEnum> where TEnum : struct, IConvertible
+    {
+        TEnum ContextRole { get; set; }
+        bool CanEdit();
+        bool CanDelete();
+        bool CanAdmin();
+        bool CanView();
+
+    }
 }

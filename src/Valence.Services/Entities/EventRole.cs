@@ -8,6 +8,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Valence.Entities
 {
+
+    public enum EventRoles
+    {
+        Public = 0,
+        Coordinator = 200,
+        Manager = 900,
+        Admin = 1000
+    }
+    
     [Table("EventRole", Schema = "dbo")]
     public class EventRole : EntityBase
     {

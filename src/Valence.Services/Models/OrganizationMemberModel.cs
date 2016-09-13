@@ -32,6 +32,13 @@ namespace Valence.Models
         public int MemberId { get; set; }
         public int OrganizationRoleId { get; set; }
 
+
+        public DateTime EffectiveTimestamp { get; set; }
+        public DateTime AssignmentTimestamp { get; set; }
+
+
+
+        #region Mappers
         public void Construct(OrganizationMember entity)
         {
 
@@ -39,6 +46,8 @@ namespace Valence.Models
             this.MemberId = entity.MemberId;
             this.OrganizationId = entity.OrganizationId;
             this.OrganizationRoleId = entity.OrganizationRoleId;
+            this.EffectiveTimestamp = entity.EffectiveTimestamp;
+            this.AssignmentTimestamp = entity.AssignmentTimestamp;            
             
         }
 
@@ -50,9 +59,12 @@ namespace Valence.Models
             entity.MemberId = this.MemberId;
             entity.OrganizationId = this.OrganizationId;
             entity.OrganizationRoleId = this.OrganizationRoleId;
+            entity.EffectiveTimestamp = this.EffectiveTimestamp;
+            entity.AssignmentTimestamp = this.AssignmentTimestamp;
 
             return entity;
 
         }
+        #endregion
     }
 }

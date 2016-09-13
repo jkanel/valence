@@ -21,8 +21,10 @@ namespace Valence.Entities
        
         public int ApplicationRoleId { get; set; }
         public virtual ApplicationRole ApplicationRole { get; set; }
+        
 
-        public DateTime AssignmentDate { get; set; }
+        public DateTime EffectiveTimestamp { get; set; }
+        public DateTime AssignmentTimestamp { get; set; }
 
     }
 }

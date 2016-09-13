@@ -1,0 +1,80 @@
+﻿@model Valence.Web.ViewModels.OrganizationViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OrganizationViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WebPageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WebPageUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsServicesVendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsServicesVendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsProductVendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsProductVendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNonProfit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsNonProfit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsEducational)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsEducational)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

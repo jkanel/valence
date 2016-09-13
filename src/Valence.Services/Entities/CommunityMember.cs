@@ -25,7 +25,9 @@ namespace Valence.Entities
         public int CommunityRoleId { get; set; }
         public virtual CommunityRole CommunityRole { get; set; }
 
-        public DateTime AssignmentDate { get; set; }
+
+        public DateTime EffectiveTimestamp { get; set; }
+        public DateTime AssignmentTimestamp { get; set; }
 
     }
 }

@@ -9,6 +9,8 @@ using Valence.Entities;
 
 namespace Valence.Repositories
 {
+
+
     public interface IRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> SelectAll(Func<TEntity, bool> WhereClause, PageRange PageRange);

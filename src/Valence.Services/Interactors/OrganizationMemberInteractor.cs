@@ -19,29 +19,25 @@ namespace Valence.Interactors
             this.Repository = Repository;
         }
 
-        public void CreateOrganizationMember(OrganizationMemberModel model, int WorkerMemberId)
+        public void CreateOrganizationMember(int ContextMemberId, OrganizationMemberModel model)
         {
             OrganizationMember entity = model.ToEntity();
-            entity.SetCreateInfo(WorkerMemberId);
+            entity.SetCreateInfo(ContextMemberId);
             Repository.Insert(entity);
         }
 
-        public void DeleteOrganizationMember(int OrganizationMemberId, int WorkerMemberId)
+        public void DeleteOrganizationMember(int ContextMemberId, int OrganizationMemberId)
         {
             Repository.DeleteSingle(OrganizationMemberId);
         }
 
-        public void UpdateOrganizationMember(OrganizationMemberModel model, int WorkerMemberId)
+        public void UpdateOrganizationMember(int ContextMemberId, OrganizationMemberModel model)
         {
             OrganizationMember entity = model.ToEntity();
-            entity.SetModifyInfo(WorkerMemberId);
+            entity.SetModifyInfo(ContextMemberId);
 
             Repository.UpdateExcept(entity, OrganizationMember.CreateProperties);
         }
-
-        public void UpdateOrganizationMemberApproval(int OrganizationMemberId, bool IsApproved, int WorkerMemberId)
-        {
-            throw new NotImplementedException();
-        }       
+        
     }
 }
