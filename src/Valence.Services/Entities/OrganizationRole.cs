@@ -14,7 +14,7 @@ namespace Valence.Entities
         Associate = 1,
         Coordinator = 2,
         Manager = 3,
-        Admin = 100
+        Admin = 10
     }
 
     [Table("OrganizationRole", Schema = "dbo")]

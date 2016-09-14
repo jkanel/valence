@@ -30,7 +30,7 @@ namespace Valence.Interactors
         /// </summary>
         /// <param name="ContextMemberId"></param>
         /// <returns></returns>
-        public OrganizationModelList GetPrivilegeOrganizations(int ContextMemberId)
+        public OrganizationModelList GetContextOrganizations(int ContextMemberId)
         {
             OrganizationModelList list = new OrganizationModelList(Repository.AssociatedSelectAll(ContextMemberId));
             return list;

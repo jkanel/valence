@@ -4,26 +4,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Valence.Entities;
+using Valence.Commands;
 
 namespace Valence.Web
 {
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,int, CustomUserLogin, CustomUserRole, CustomUserClaim>, IValenceContext
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
-        {
-        }
+            : base("DefaultConnection") { }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
 
+        #region IValenceContext Methods
+
         public System.Data.Entity.DbSet<Organization> Organizations { get; set; }
         public System.Data.Entity.DbSet<OrganizationMember> OrganizationMembers { get; set; }
+        public System.Data.Entity.DbSet<OrganizationRole> OrganizationRoles { get; set; }
+
         public System.Data.Entity.DbSet<Community> Communities { get; set; }
         public System.Data.Entity.DbSet<CommunityMember> CommunityMembers { get; set; }
+        
+        #endregion
 
 
         /*

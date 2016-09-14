@@ -26,8 +26,7 @@ namespace Valence.Services
 
         public OrganizationModelList GetContextOrganizations(int ContextMemberId)
         {
-
-            return OrganizationInteractor.GetPrivilegeOrganizations(ContextMemberId);
+            return OrganizationInteractor.GetContextOrganizations(ContextMemberId);
         }
 
         public void CreateOrganization(int ContextMemberId, OrganizationModel model)
