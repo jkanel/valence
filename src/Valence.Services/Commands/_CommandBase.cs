@@ -9,7 +9,7 @@ namespace Valence.Commands
 {
     public class CommandBase
     {
-        {
+        
         public DbContext Context { get; set; }
 
         public CommandBase() { }

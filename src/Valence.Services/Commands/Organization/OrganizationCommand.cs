@@ -9,9 +9,9 @@ using Valence.Entities;
 namespace Valence.Commands
 {
     
-    class GetOrganizationsCommand : CommandBase
+    public class OrganizationCommand : CommandBase
     {
-        public GetOrganizationsCommand(DbContext Context) : base(Context){ }
+        public OrganizationCommand(DbContext Context) : base(Context){ }
 
         public IEnumerable<OrganizationBinder> GetMemberOrganizations(int ContextMemberId)
         {
@@ -22,6 +22,7 @@ namespace Valence.Commands
                     Actions = new OrganizationActions(org.OrganizationMembers.Where(om => om.MemberId == ContextMemberId).Select(omx => omx.OrganizationRoleId))
                 });
         }
+
 
         public OrganizationBinder GetOrganization(int ContextMemberId, int OrganizationId)
         {

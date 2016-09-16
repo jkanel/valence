@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Organization\GetOrganizationsCommand.cs" />
+    <Compile Include="Commands\Application\ApplicationCommand.cs" />
+    <Compile Include="Commands\Application\ApplicationAction.cs" />
+    <Compile Include="Commands\Organization\OrganizationCommand.cs" />
     <Compile Include="Commands\Organization\OrganizationActions.cs" />
     <Compile Include="Commands\Organization\OrganizationBinder.cs" />
+    <Compile Include="Commands\_ActionBase.cs" />
     <Compile Include="Commands\_CommandBase.cs" />
     <Compile Include="Commands\_ContextBase.cs" />
     <Compile Include="Entities\Address.cs" />

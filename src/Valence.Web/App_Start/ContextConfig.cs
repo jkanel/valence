@@ -27,7 +27,9 @@ namespace Valence.Web
 
         public System.Data.Entity.DbSet<Community> Communities { get; set; }
         public System.Data.Entity.DbSet<CommunityMember> CommunityMembers { get; set; }
-        
+
+        public System.Data.Entity.DbSet<Valence.Web.ViewModels.OrganizationViewModel> OrganizationViewModels { get; set; }
+
         #endregion
 
 

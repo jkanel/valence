@@ -10,15 +10,14 @@ namespace Valence.Commands
 {
     public enum OrganizationActionEnum
     {
-        ViewPublic = 0,
-        View = 1,        
-        Edit = 2,
+        ReadPublic = 0,
+        Read = 1,        
+        Update = 2,
         Delete = 3,
-        Create = 4
     }
 
 
-    public class OrganizationActions:List<OrganizationActionEnum>
+    public class OrganizationActions:List<OrganizationActionEnum>, IAction<OrganizationActionEnum>
     {
         public OrganizationActions() { }
 
@@ -40,25 +39,26 @@ namespace Valence.Commands
         {
             base.AddRange(OrganizationActions.GetRoleActions(roles));
         }
-        
+
+        #region Static Methods
 
         private static PrivilegeTuple[] Privileges =
         {
 
-            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.ViewPublic),
-            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.View),
-            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.Edit),
+            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.ReadPublic),
+            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.Read),
+            new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.Update),
             new PrivilegeTuple(OrganizationRoleEnum.Admin, OrganizationActionEnum.Delete),
 
-            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.ViewPublic),
-            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.View),
-            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.Edit),
+            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.ReadPublic),
+            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.Read),
+            new PrivilegeTuple(OrganizationRoleEnum.Manager, OrganizationActionEnum.Update),
 
-            new PrivilegeTuple(OrganizationRoleEnum.Associate, OrganizationActionEnum.ViewPublic),
-            new PrivilegeTuple(OrganizationRoleEnum.Associate, OrganizationActionEnum.View),
+            new PrivilegeTuple(OrganizationRoleEnum.Associate, OrganizationActionEnum.ReadPublic),
+            new PrivilegeTuple(OrganizationRoleEnum.Associate, OrganizationActionEnum.Read),
 
             // automatically available to anyone (public)
-            new PrivilegeTuple(OrganizationRoleEnum.None, OrganizationActionEnum.ViewPublic),
+            new PrivilegeTuple(OrganizationRoleEnum.None, OrganizationActionEnum.ReadPublic),
 
         };
 
@@ -70,6 +70,33 @@ namespace Valence.Commands
         public static bool HasPrivilege(OrganizationRoleEnum role, OrganizationActionEnum action)
         {
             return Privileges.Any(x => (x.Role == role) && x.Action == action);
-        }    
+        }
+
+        public bool HasPrivilege(OrganizationActionEnum action)
+        {
+            return this.Any(x => x == action);
+        }
+
+        #endregion
+
+        #region IAction Methods
+
+        public bool CanRead()
+        {
+            return this.HasPrivilege(OrganizationActionEnum.Read);
+        }
+
+        public bool CanUpdate()
+        {
+            return this.HasPrivilege(OrganizationActionEnum.Update);
+        }
+
+        public bool CanDelete()
+        {
+            return this.HasPrivilege(OrganizationActionEnum.Delete);
+        }
+
+
+        #endregion
     }
 }

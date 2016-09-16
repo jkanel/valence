@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Valence.Web.ViewModels.OrganizationViewModel>
+﻿@model IEnumerable<Valence.Commands.OrganizationBinder>
 
 @{
     ViewBag.Title = "Index";
@@ -7,30 +7,37 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @{ 
+
+        if (model.CanRead())
+        {            
+            Html.ActionLink("Create New", "Create");           
+        }
+
+    }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrganizationName)
+            @Html.DisplayNameFor(model => model.Organization.OrganizationName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Organization.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WebPageUrl)
+            @Html.DisplayNameFor(model => model.Organization.WebPageUrl)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsServicesVendor)
+            @Html.DisplayNameFor(model => model.Organization.IsServicesVendor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsProductVendor)
+            @Html.DisplayNameFor(model => model.Organization.IsProductVendor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsNonProfit)
+            @Html.DisplayNameFor(model => model.Organization.IsNonProfit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsEducational)
+            @Html.DisplayNameFor(model => model.Organization.IsEducational)
         </th>
         <th></th>
     </tr>
@@ -38,30 +45,51 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.OrganizationName)
+            @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.Organization.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WebPageUrl)
+            @Html.DisplayFor(modelItem => item.Organization.WebPageUrl)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsServicesVendor)
+            @Html.DisplayFor(modelItem => item.Organization.IsServicesVendor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsProductVendor)
+            @Html.DisplayFor(modelItem => item.Organization.IsProductVendor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsNonProfit)
+            @Html.DisplayFor(modelItem => item.Organization.IsNonProfit)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsEducational)
+            @Html.DisplayFor(modelItem => item.Organization.IsEducational)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrganizationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrganizationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrganizationId })
+            @{
+                int LinkCount = 0;
+
+                if (item.Actions.CanUpdate())
+                {
+                    Html.ActionLink("Edit", "Edit", new { id = item.Organization.OrganizationId });
+                    LinkCount++;
+                }
+
+                if (item.Actions.CanRead())
+                {
+                    if (LinkCount > 0) { Html.Display(" | "); }
+                    Html.ActionLink("Details", "Details", new { id = item.Organization.OrganizationId });
+                    LinkCount++;
+                }
+
+
+                if (item.Actions.CanDelete())
+                {
+                    if (LinkCount > 0) { Html.Display(" | "); }
+                    Html.ActionLink("Delete", "Delete", new { id = item.Organization.OrganizationId });
+                }
+            }
+
         </td>
     </tr>
 }

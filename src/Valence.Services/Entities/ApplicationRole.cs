@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Valence.Entities
 {
-    public enum ApplicationRoles
+    public enum ApplicationRoleEnum
     {
-        Public = 0,
+        None = 0,
         Member = 100,
         Admin = 1000
     }

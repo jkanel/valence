@@ -220,6 +220,7 @@
     </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="App_Start\ContextConfig.cs" />
+    <Compile Include="App_Start\ApplicationUserInfo.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\OrganizationViewModels.cs" />
     <Compile Include="ViewModels\_ViewModelBase.cs" />

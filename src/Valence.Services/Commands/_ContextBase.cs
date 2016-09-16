@@ -13,7 +13,9 @@ namespace Valence.Commands
         DbSet<Organization> Organizations { get; set; }
         DbSet<OrganizationMember> OrganizationMembers { get; set; }
         DbSet<OrganizationRole> OrganizationRoles { get; set; }
-    
+        DbSet<ApplicationMember> ApplicationMember { get; set; }
+        DbSet<ApplicationRole> ApplicationRoles { get; set; }
+
     }
 
     public class ValenceContext : IValenceContext
@@ -21,5 +23,8 @@ namespace Valence.Commands
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<OrganizationMember> OrganizationMembers { get; set; }
         public virtual DbSet<OrganizationRole> OrganizationRoles { get; set; }
+
+        public virtual DbSet<ApplicationMember> ApplicationMember { get; set; }
+        public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
     }
 }

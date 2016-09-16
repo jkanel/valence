@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
+using Valence.Commands;
+using Valence.Web;
+
 namespace Valence.Web.ViewModels
 {
-    public class ContextPrivilegeViewModelBase
+
+    public interface IEntityViewModel<TEntity> where TEntity : class
     {
-        [HiddenInput(DisplayValue = false)]
-        public bool CanEdit { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        public bool CanDelete { get; set; }
+        void Construct(TEntity entity);
+        TEntity ToEntity();
 
-        [HiddenInput(DisplayValue = false)]
-        public bool CanAdmin { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        public bool CanCoordinate { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        public bool CanView { get; set; }
-
+        bool CanRead { get; set; }               
+        bool CanUpdate { get; set; }
+        bool CanDelete{ get; set; }
+        
+    }
+    
+    public interface IApplicationViewModel
+    {
+        ApplicationUserInfo ApplicationUserInfo { get; set; }
     }
 
-    
+
 }

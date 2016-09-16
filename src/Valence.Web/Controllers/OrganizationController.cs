@@ -6,13 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+
 using Valence.Web;
 using Valence.Web.ViewModels;
-using Valence.Services;
-using Valence.Interactors;
-using Valence.Repositories;
-using Valence.Models;
 using Valence.Entities;
+using Valence.Commands;
 
 namespace Valence.Web.Controllers
 {
@@ -20,45 +19,18 @@ namespace Valence.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        #region Repositories
-
-        private OrganizationRepository _OrganizationRepository;
-        private OrganizationMemberRepository _OrganizationMemberRepository;
-
-        public OrganizationRepository OrganizationRepository { get
-            {
-                if(this._OrganizationRepository == null)
-                {
-                    this._OrganizationRepository = new OrganizationRepository(db);
-                }
-                return this._OrganizationRepository;
-            }
-        }
-
-        public OrganizationMemberRepository OrganizationMemberRepository
-        {
-            get
-            {
-                if (this._OrganizationMemberRepository == null)
-                {
-                    this._OrganizationMemberRepository = new OrganizationMemberRepository(db);
-                }
-                return this._OrganizationMemberRepository;
-            }
-        }
-
-        #endregion
-
         // GET: Organization
         public ActionResult Index()
         {
+            int ContextMemberId = User.Identity.GetUserId<int>();
+            
+            OrganizationCommand ocmd = new OrganizationCommand(db);
+            OrganizationViewModelList ovmlist = new OrganizationViewModelList(ocmd.GetMemberOrganizations(ContextMemberId));
 
-            OrganizationInteractor interactor = new OrganizationInteractor(db);
-            OrganizationService service = new OrganizationService();
-            service.OrganizationInteractor = interactor;
-         
-
-            return View();
+            ApplicationCommand acmd = new ApplicationCommand(db);
+            ovmlist.ApplicationUserInfo.SetApplicationInfo(acmd.GetApplicationActions(ContextMemberId), "Jeff");
+            
+            return View(ovmlist);
         }
 
         // GET: Organization/Details/5
@@ -68,7 +40,9 @@ namespace Valence.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             OrganizationViewModel organizationViewModel = db.OrganizationViewModels.Find(id);
+
             if (organizationViewModel == null)
             {
                 return HttpNotFound();
